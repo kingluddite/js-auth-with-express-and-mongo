@@ -1,0 +1,24 @@
+doctype html(lang='en')
+head
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(http-equiv='x-ua-compatible', content='ie=edge')
+  title Bookworm | #{title}
+  link(rel='stylesheet', href='scripts/bootstrap/dist/css/bootstrap.min.css')
+  link(rel='stylesheet', href='/css/style.css')
+
+  body
+    // load navbar.jade
+    include navbar
+
+    // content block
+    block content
+
+    // footer
+    p.foot.text-xs-center A Treehouse Project
+
+    script(src='scripts/jquery/dist/jquery.min.js')
+    script(src='scripts/tether/dist/js/tether.min.js')
+    script(src='scripts/bootstrap/dist/js/bootstrap.min.js')
+
+    
