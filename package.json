@@ -1,0 +1,12 @@
+{
+  "name": "js-auth-with-express-and-mongo",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "node ./app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
