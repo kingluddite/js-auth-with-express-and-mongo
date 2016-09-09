@@ -1,10 +1,22 @@
+'use strict';
+
 var express = require( 'express' );
 var router = express.Router();
 var User = require( '../models/user.js' );
 var mid = require( '../middleware' );
 
+// GET /login
+router.get( '/login', function( req, res, next ) {
+  return res.render( 'login', { title: 'Log In' } );
+} );
+
+// POST /login
+router.post( '/login', function( req, res, next ) {
+  res.send( 'logged in' );
+} );
+
 // GET /profile
-router.get( '/profile', mid.requiresLogin, function( req, res, next ) {
+router.get( '/profile', function( req, res, next ) {
   User.findById( req.session.userId )
     .exec( function( error, user ) {
       if ( error ) {
@@ -14,7 +26,6 @@ router.get( '/profile', mid.requiresLogin, function( req, res, next ) {
       }
     } );
 } );
-
 
 // GET /logout
 router.get( '/logout', function( req, res, next ) {
@@ -59,10 +70,11 @@ router.post( '/login', function( req, res, next ) {
   }
 } );
 
-
 // GET /register
-router.get( '/register', mid.loggedOut, function( req, res, next ) {
-  return res.render( 'register', { title: 'Register Today!' } );
+router.get( '/register', function( req, res, next ) {
+  // just quick test if route is working
+  // by sending some text back to client
+  return res.render( 'register', { title: 'Register' } );
 } );
 
 // POST /register
@@ -87,12 +99,16 @@ router.post( '/register', function( req, res, next ) {
       password: req.body.password
     };
 
+    // console.log( userData );
+
+
     // use schema's `create` method to insert document into Mongo
     User.create( userData, function( error, user ) {
       if ( error ) {
         return next( error );
       } else {
-        req.session.userId = user._id;
+        req.session.userId = user._id; // ADD THIS LINE
+
         return res.redirect( '/profile' );
       }
     } );
